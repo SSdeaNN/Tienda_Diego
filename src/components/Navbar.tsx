@@ -9,8 +9,8 @@ export const Navbar = () => {
           SHOPSOULS
         </Link>
         <div className="flex items-center space-x-8">
-          <Link href="/categories" className="text-gray-700 hover:text-purple-600 font-medium flex items-center">
-            Categorías <ArrowRight className="ml-1 h-4 w-4" />
+          <Link href="/productos" className="text-gray-700 hover:text-purple-600 font-medium flex items-center">
+            Productos <ArrowRight className="ml-1 h-4 w-4" />
           </Link>
           <Link href="/cart" className="relative p-2 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 hover:shadow-lg transition">
             <ShoppingCart className="h-6 w-6 text-purple-600" />

@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 
 export default function ProductosPage() {
   const [productos] = useState([
@@ -53,6 +54,7 @@ export default function ProductosPage() {
         ))}
       </div>
     </div>
+    <Footer />
   </div>
   );
 }

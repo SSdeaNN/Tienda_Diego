@@ -28,13 +28,13 @@
     </div>
 </nav>
 
-<div class="container mt-4">
+<div class="container mt-6">
     <h2 class="mb-4 text-center">Carrito de Compras</h2>
 
     <% if (carrito.length === 0) { %>
         <p class="text-center">Tu carrito está vacío</p>
     <% } else { %>
-        <ul class="list-group mb-4">
+        <ul class="list-group mb-6">
             <% carrito.forEach(item => { %>
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                     <div>
@@ -49,7 +49,7 @@
         </ul>
 
         <div class="text-center">
-            <a href="/" class="btn btn-success">Finalizar Compra</a>
+            <a href="/" class="btn btn-success">Volver al inicio</a>
         </div>
     <% } %>
 </div>

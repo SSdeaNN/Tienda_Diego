@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro / Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    input {
+      margin-bottom: 1rem;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 0.7rem;
+      background-color: #2d98da;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #2475B0;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .tab {
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab.active {
+      border-color: #2d98da;
+      font-weight: bold;
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" id="tabRegister">Registro</div>
+      <div class="tab" id="tabLogin">Login</div>
+    </div>
+
+    <!-- Registro -->
+    <div class="form-section active" id="registerSection">
+      <h2>Registro</h2>
+      <form id="registerForm">
+        <input type="text" name="email" placeholder="Nombre de usuario" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button type="submit">Registrarse</button>
+      </form>
+      <div id="registerMessage" class="message"></div>
+    </div>
+
+    <!-- Login -->
+    <div class="form-section" id="loginSection">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="text" name="email" placeholder="Nombre de usuario" required />
+        <input type="password" name="password" placeholder="Contraseña" required />
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+      <div id="loginMessage" class="message"></div>
+    </div>
+  </div>
+
+  <script>
+    // Cambio de pestañas
+    const tabRegister = document.getElementById('tabRegister');
+    const tabLogin = document.getElementById('tabLogin');
+    const registerSection = document.getElementById('registerSection');
+    const loginSection = document.getElementById('loginSection');
+
+    tabRegister.addEventListener('click', () => {
+      tabRegister.classList.add('active');
+      tabLogin.classList.remove('active');
+      registerSection.classList.add('active');
+      loginSection.classList.remove('active');
+    });
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('active');
+      tabRegister.classList.remove('active');
+      loginSection.classList.add('active');
+      registerSection.classList.remove('active');
+    });
+
+    // Registro
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        email: e.target.email.value,
+        password: e.target.password.value
+      };
+
+      try {
+        const res = await fetch('https://geros-store.onrender.com/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        const data = await res.json();
+        const message = document.getElementById('registerMessage');
+
+        if (res.ok) {
+          message.textContent = 'Registro exitoso.';
+          message.style.color = 'green';
+          setTimeout( ()=> {
+            window.location.href = '/protected'; // Redirige si es necesario
+          }, 2000);
+        } else {
+          message.textContent = data.error || 'Error en el registro.';
+          message.style.color = 'red';
+        }
+      } catch (error) {
+        document.getElementById('registerMessage').textContent = 'Error de red.';
+      }
+    });
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = {
+        email: e.target.email.value,
+        password: e.target.password.value
+      };
+
+      try {
+        const res = await fetch('https://geros-store.onrender.com/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+        
+        const data = await res.json();
+        const message = document.getElementById('loginMessage');
+
+        if (res.ok) {
+          message.textContent = 'Inicio de sesión exitoso.';
+          message.style.color = 'green';
+          setTimeout( ()=> {
+            window.location.href = '/home'; // Redirige si es necesario
+          }, 2000);
+        } else {
+          message.textContent = data.error || 'Credenciales incorrectas.';
+          message.style.color = 'red';
+        }
+      } catch (error) {
+        document.getElementById('loginMessage').textContent = 'Error de red.';
+      }
+    });
+  </script>
+</body>
+</html>

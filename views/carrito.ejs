@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrito - MiTienda</title>
+    <link rel="stylesheet" href="/styles.css">    
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">MiTienda</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="/productos">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/carrito">Carrito 🛒 <span class="badge bg-success"><%= carrito.length %></span></a></li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Buscar productos" aria-label="Buscar">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Carrito de Compras</h2>
+
+    <% if (carrito.length === 0) { %>
+        <p class="text-center">Tu carrito está vacío</p>
+    <% } else { %>
+        <ul class="list-group mb-4">
+            <% carrito.forEach(item => { %>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong><%= item.nombre %></strong> - $<%= item.precio %> MXN
+                    </div>
+                    <form action="/eliminar" method="POST">
+                        <input type="hidden" name="id" value="<%= item.id %>">
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+
+        <div class="text-center">
+            <a href="/" class="btn btn-success">Finalizar Compra</a>
+        </div>
+    <% } %>
+</div>
+
+</body>
+</html>

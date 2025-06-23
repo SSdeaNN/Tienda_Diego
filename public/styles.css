@@ -1,0 +1,351 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121317;
+  color: #e2d8b7;
+  line-height: 1.6;
+}
+
+/* Contenedor general para todo el contenido: max-width y padding lateral */
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Navbar con container-fluid para controlar ancho y padding */
+.navbar .container-fluid {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Navbar */
+nav.navbar {
+  background-color: #2c2f38;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.8);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.navbar-brand {
+  color: #d4b84a !important;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  user-select: none;
+  padding-left: 0;
+  padding-right: 2rem;
+}
+
+.navbar-nav {
+  align-items: center;
+}
+
+.nav-link {
+  color: #d4b84a !important;
+  font-weight: 600;
+  margin-right: 1.5rem;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  letter-spacing: 0.05em;
+}
+
+.nav-link:last-child {
+  margin-right: 0;
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: #f6e27f !important;
+  text-decoration: underline;
+}
+
+.badge.bg-success {
+  background-color: #b49f48 !important;
+  color: #121317;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.25em 0.5em;
+  vertical-align: middle;
+}
+
+.navbar-toggler {
+  border-color: #d4b84a;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23d4b84a' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Buscador */
+form.d-flex {
+  max-width: 350px;
+  margin-left: auto;
+}
+
+input[type="search"] {
+  background-color: #20232a;
+  border: 2px solid #b49f48;
+  color: #e2d8b7;
+  font-weight: 600;
+  padding: 7px 12px;
+  border-radius: 6px 0 0 6px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="search"]::placeholder {
+  color: #a59f7a;
+}
+
+input[type="search"]:focus {
+  outline: none;
+  border-color: #f6e27f;
+  background-color: #292d36;
+  color: #fff;
+}
+
+button.btn-outline-success {
+  background-color: #b49f48;
+  border: 2px solid #b49f48;
+  color: #121317;
+  font-weight: 700;
+  border-radius: 0 6px 6px 0;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button.btn-outline-success:hover {
+  background-color: #f6e27f;
+  color: #121317;
+  box-shadow: 0 0 10px #f6e27f;
+}
+
+/* Contenedor principal */
+.container {
+  padding-top: 25px;
+  padding-bottom: 40px;
+}
+
+/* Jumbotron */
+.jumbotron {
+  background-color: #2c2f38;
+  border-radius: 14px;
+  padding: 40px 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.7);
+  color: #f6e27f;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-align: center;
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+  color: #f6e27f;
+  letter-spacing: 1.1px;
+  font-weight: 700;
+}
+
+/* Cards de producto */
+/* Contenedor de productos usando CSS Grid */
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px; /* espacio uniforme entre tarjetas */
+  padding-bottom: 20px;
+}
+
+/* Card con relación cuadrada */
+.card {
+  background-color: #20232a;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.7);
+  border: none;
+  color: #e2d8b7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  aspect-ratio: 1 / 1; /* ¡Clave para que sea cuadrada! */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 20px rgba(180,159,72,0.7);
+}
+
+/* Imagen ajustada dentro de la tarjeta, ocupando el espacio superior */
+.card-img-top {
+  width: 100%;
+  height: auto;
+  max-height: 50%; /* que no ocupe más de la mitad para que quede balanceado */
+  object-fit: contain;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  background-color: #292d36; /* fondo para que resalte la imagen */
+  padding: 10px;
+}
+
+/* Body de la card */
+.card-body {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Título y texto centrados y con margen */
+.card-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.card-text {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: auto;
+  text-align: center;
+}
+
+/* Botón en la parte inferior con ancho completo */
+.btn-primary {
+  margin-top: auto;
+  background-color: #b49f48;
+  border: none;
+  font-weight: 700;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  color: #121317;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #f6e27f;
+  box-shadow: 0 0 10px #f6e27f;
+  color: #121317;
+}
+
+/* Botones agregar */
+.btn-primary {
+  background-color: #b49f48;
+  border: none;
+  font-weight: 700;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  color: #121317;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #f6e27f;
+  box-shadow: 0 0 10px #f6e27f;
+  color: #121317;
+}
+
+/* Carrito lista */
+.list-group-item {
+  background-color: #292d36;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  color: #e2d8b7;
+  font-weight: 600;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-group-item:hover {
+  background-color: #3b3f4a;
+  box-shadow: 0 0 12px #b49f48;
+}
+
+/* Botones eliminar */
+.btn-danger {
+  background-color: #703030;
+  border: none;
+  color: #f6e27f;
+  font-weight: 700;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #a04242;
+  box-shadow: 0 0 8px #a04242;
+  color: #fff;
+}
+
+/* Enlaces */
+a {
+  color: #b49f48;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #f6e27f;
+  text-decoration: underline;
+}
+
+/* Responsive */
+
+/* Ajustes navbar móvil */
+@media (max-width: 767.98px) {
+  .nav-link {
+    margin-right: 0;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #444;
+  }
+  
+  .navbar-nav {
+    background-color: #2c2f38;
+    padding: 0.5rem 0;
+  }
+  
+  form.d-flex {
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 10px;
+    width: 100%;
+  }
+  
+  input[type="search"] {
+    border-radius: 6px;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  button.btn-outline-success {
+    border-radius: 6px;
+    width: 100%;
+  }
+}
+
+/* Cards: responsive columns */
+@media (max-width: 991.98px) {
+  .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

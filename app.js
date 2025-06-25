@@ -14,6 +14,12 @@ app.use(session({
     saveUninitialized: true
 }));
 
+// 🔥 Middleware para pasar usuario a todas las vistas
+app.use((req, res, next) => {
+    res.locals.usuario = req.session.usuario;
+    next();
+});
+
 // Simulación de productos
 const productos = [
     { id: 1, nombre: 'Laptop Gamer', precio: 18000, imagen: 'https://via.placeholder.com/300x200?text=Laptop+Gamer' },
@@ -47,7 +53,6 @@ app.get('/productos', (req, res) => {
     res.render('productos', { productos: productosFiltrados, carrito: req.session.carrito || [], q });
 });
 
-
 // Carrito
 app.get('/carrito', (req, res) => {
     const carrito = req.session.carrito || [];
@@ -74,6 +79,47 @@ app.post('/eliminar', (req, res) => {
         req.session.carrito = req.session.carrito.filter(p => p.id != id);
     }
     res.redirect('/carrito');
+});
+
+// 🔥 Rutas de Login, Registro y Logout
+
+// Vista Login
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+// Vista Registro
+app.get('/registro', (req, res) => {
+    res.render('registro');
+});
+
+// Proceso Login
+app.post('/login', (req, res) => {
+    const { usuario } = req.body;
+    if (usuario && usuario.trim() !== '') {
+        req.session.usuario = usuario.trim();
+        res.redirect('/');
+    } else {
+        res.redirect('/login');
+    }
+});
+
+// Proceso Registro (simulado)
+app.post('/registro', (req, res) => {
+    const { usuario } = req.body;
+    if (usuario && usuario.trim() !== '') {
+        req.session.usuario = usuario.trim();
+        res.redirect('/');
+    } else {
+        res.redirect('/registro');
+    }
+});
+
+// Logout
+app.post('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
 });
 
 // Servidor

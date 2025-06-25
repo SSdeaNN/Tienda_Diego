@@ -23,12 +23,12 @@ const productos = [
     { id: 4, nombre: 'Smartwatch', precio: 2500, imagen: 'https://via.placeholder.com/300x200?text=Smartwatch' },
     { id: 5, nombre: 'Cámara', precio: 8500, imagen: 'https://via.placeholder.com/300x200?text=Camara' }
 ];
-app.get('/login', (req, res) => {
+app.get('/', (req, res) => {
     res.render('login')
 })
 
 // Home
-app.get('/', async (req, res) => {
+app.get('/home', async (req, res) => {
     const q = req.query.q ? req.query.q.toLowerCase() : '';
     let productosFiltrados = [];
 

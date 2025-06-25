@@ -161,7 +161,7 @@
           message.textContent = 'Registro exitoso.';
           message.style.color = 'green';
           setTimeout( ()=> {
-            window.location.href = '/'; // Redirige si es necesario
+            window.location.href = '/login'; // Redirige si es necesario
           }, 2000);
         } else {
           message.textContent = data.error || 'Error en el registro.';
@@ -199,7 +199,7 @@
           message.textContent = 'Inicio de sesión exitoso.';
           message.style.color = 'green';
           setTimeout( ()=> {
-            window.location.href = '/'; // Redirige si es necesario
+            window.location.href = '/home'; // Redirige si es necesario
           }, 2000);
         } else {
           message.textContent = data.error || 'Credenciales incorrectas.';

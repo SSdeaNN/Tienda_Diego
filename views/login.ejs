@@ -94,7 +94,7 @@
     <div class="form-section active" id="registerSection">
       <h2>Registro</h2>
       <form id="registerForm">
-        <input type="text" name="email" placeholder="Nombre de usuario" required />
+        <input type="email" name="email" placeholder="Correo electronico" required />
         <input type="password" name="password" placeholder="Contraseña" required />
         <button type="submit">Registrarse</button>
       </form>
@@ -105,7 +105,7 @@
     <div class="form-section" id="loginSection">
       <h2>Login</h2>
       <form id="loginForm">
-        <input type="text" name="email" placeholder="Nombre de usuario" required />
+        <input type="email" name="email" placeholder="Correo electrónico" required />
         <input type="password" name="password" placeholder="Contraseña" required />
         <button type="submit">Iniciar Sesión</button>
       </form>
@@ -143,6 +143,7 @@
         password: e.target.password.value
       };
 
+      console.log(formData)
       try {
         const res = await fetch('https://geros-store.onrender.com/auth/register', {
           method: 'POST',
@@ -153,13 +154,14 @@
         });
         
         const data = await res.json();
+        console.log(data)
         const message = document.getElementById('registerMessage');
 
         if (res.ok) {
           message.textContent = 'Registro exitoso.';
           message.style.color = 'green';
           setTimeout( ()=> {
-            window.location.href = '/protected'; // Redirige si es necesario
+            window.location.href = '/'; // Redirige si es necesario
           }, 2000);
         } else {
           message.textContent = data.error || 'Error en el registro.';
@@ -179,6 +181,7 @@
         password: e.target.password.value
       };
 
+      console.log(formData)
       try {
         const res = await fetch('https://geros-store.onrender.com/auth/login', {
           method: 'POST',
@@ -190,12 +193,13 @@
         
         const data = await res.json();
         const message = document.getElementById('loginMessage');
+        console.log(data)
 
         if (res.ok) {
           message.textContent = 'Inicio de sesión exitoso.';
           message.style.color = 'green';
           setTimeout( ()=> {
-            window.location.href = '/home'; // Redirige si es necesario
+            window.location.href = '/'; // Redirige si es necesario
           }, 2000);
         } else {
           message.textContent = data.error || 'Credenciales incorrectas.';

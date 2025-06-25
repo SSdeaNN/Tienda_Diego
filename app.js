@@ -28,15 +28,45 @@ app.get('/login', (req, res) => {
 })
 
 // Home
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     const q = req.query.q ? req.query.q.toLowerCase() : '';
-    let productosFiltrados = productos;
+    let productosFiltrados = [];
 
-    if (q) {
-        productosFiltrados = productos.filter(p => p.nombre.toLowerCase().includes(q));
+    try {
+      const response = await fetch('https://api.escuelajs.co/api/v1/products')
+      if (!response.ok) {
+        throw new Error('Problemas en china')
+      }
+      const productos = await response.json();
+      productosFiltrados = q
+      ? productos.filter(p => p.title.toLowerCase().includes(q))
+      : productos;
+
+      // Adaptar estructura a lo que espera la vista EJS
+      const productosAdaptados = productosFiltrados.map(p => ({
+        id: p.id,
+        nombre: p.title,
+        precio: p.price,
+        imagen: p.images?.[0] || 'https://placehold.co/600x400'
+      }));
+
+      res.render('home', {
+        productos: productosAdaptados,
+        carrito: req.session.carrito || [],
+        q
+      });
+    } catch (error) {
+        console.error('Error al consumir API externa:', error.message);
+
+        res.render('productos', {
+          productos: [],
+          carrito: req.session.carrito || [],
+          q,
+          error: 'No se pudieron cargar los productos'
+        });
+
     }
 
-    res.render('home', { productos: productosFiltrados, carrito: req.session.carrito || [], q });
 });
 
 // Productos

@@ -90,7 +90,33 @@ nav.navbar {
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%232d98da' stroke-width='3' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
+/* Distribuir horizontalmente los elementos del navbar */
+.navbar .container-fluid {
+    display: flex;
+    justify-content: space-between; /* Espacio entre el menú y el buscador */
+    align-items: center; /* Centrado vertical */
+    width: 100%;
+    padding: 10px;
+    gap: 40px;
+}
 
+/* Alinear el listado de navegación de forma horizontal */
+.navbar-nav {
+    display: flex;
+    flex-direction: row; /* Muy importante para que estén uno al lado del otro */
+    list-style: none; /* Elimina los puntitos */
+    margin-right: auto;
+}
+
+/* Quitar los bullets del menú */
+.navbar-nav li {
+    margin-right: 20px;
+}
+
+/* Opcional: si quieres alinear más bonito */
+.navbar-nav li:last-child {
+    margin-right: 0;
+}
 /* Buscador */
 form.d-flex {
   max-width: 350px;

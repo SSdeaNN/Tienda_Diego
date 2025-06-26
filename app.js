@@ -125,6 +125,16 @@ app.post('/agregar', (req, res) => {
     res.redirect('/carrito');
 }); */
 
+app.get('/buscar', (req, res) => {
+    const query = req.query.q.toLowerCase(); 
+    const productosFiltrados = productos.filter(producto =>
+        producto.nombre.toLowerCase().includes(query)
+    );
+
+    res.render('resultados', { productos: productosFiltrados, busqueda: query });
+});
+
+
 // Eliminar del carrito
 app.post('/eliminar', (req, res) => {
     const { id } = req.body;
@@ -133,6 +143,12 @@ app.post('/eliminar', (req, res) => {
     }
     res.redirect('/carrito');
 });
+
+app.post('/vaciar-carrito', (req, res) => {
+    req.session.carrito = []; // O como tengas guardado tu carrito
+    res.sendStatus(200); // Respuesta rápida sin contenido
+});
+
 
 app.post('/agregar', async (req, res) => {
   const id = req.body.id;

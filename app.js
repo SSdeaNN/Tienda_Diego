@@ -15,14 +15,6 @@ app.use(session({
     saveUninitialized: true
 }));
 
-// Simulación de productos
-const productos = [
-    { id: 1, nombre: 'Laptop Gamer', precio: 18000, imagen: 'https://via.placeholder.com/300x200?text=Laptop+Gamer' },
-    { id: 2, nombre: 'Smartphone', precio: 9500, imagen: 'https://via.placeholder.com/300x200?text=Smartphone' },
-    { id: 3, nombre: 'Audífonos', precio: 1500, imagen: 'https://via.placeholder.com/300x200?text=Audifonos' },
-    { id: 4, nombre: 'Smartwatch', precio: 2500, imagen: 'https://via.placeholder.com/300x200?text=Smartwatch' },
-    { id: 5, nombre: 'Cámara', precio: 8500, imagen: 'https://via.placeholder.com/300x200?text=Camara' }
-];
 app.get('/', (req, res) => {
     res.render('login')
 })
